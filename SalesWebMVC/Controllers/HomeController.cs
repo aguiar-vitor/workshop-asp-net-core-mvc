@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SalesWebMVC.Models;
 using System.Diagnostics;
+using SalesWebMVC.Models.ViewModels;
 
 namespace SalesWebMVC.Controllers {
     public class HomeController : Controller {
@@ -15,6 +16,7 @@ namespace SalesWebMVC.Controllers {
         public IActionResult About() {
             ViewData["Message"] = "Salles Web MVC App from C# Course";
             ViewData["Professor"] = "Nelio Alves";
+
             return View();
         }
 
