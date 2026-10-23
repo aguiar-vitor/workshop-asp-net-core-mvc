@@ -1,7 +1,7 @@
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SalesWebMVC.Models;
+using SalesWebMVC.Data;
 
 public class DepartmentsController : Controller
 {
