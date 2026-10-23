@@ -1,8 +1,11 @@
 using Microsoft.EntityFrameworkCore;
+using SalesWebMVC.Models;
 
 namespace SalesWebMVC.Data;
 
 public class SalesWebMVCContext(DbContextOptions<SalesWebMVCContext> options) : DbContext(options)
 {
-    public DbSet<SalesWebMVC.Models.Department> Department { get; set; } = default!;
+    public DbSet<Department> Department { get; set; }
+    public DbSet<Seller> Seller { get; set; }
+    public DbSet<SalesRecord> SalesRecords { get; set; }
 }
