@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using SalesWebMvc.Services;
+using SalesWebMVC.Services;
 using SalesWebMVC.Data;
 using SalesWebMVC.Services;
 
