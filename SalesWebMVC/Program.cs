@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using SalesWebMVC.Data;
-using SalesWebMVC.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
