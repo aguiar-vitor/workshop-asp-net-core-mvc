@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using SalesWebMVC.Services;
 using SalesWebMVC.Data;
-using SalesWebMVC.Services;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +19,17 @@ builder.Services.AddScoped<DepartmentService>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-var app = builder.Build();
+var app = builder.Build(); // O 'app' é criado aqui!
+
+// A configuração de localização do app deve ficar AQUI, depois de criado:
+var enUS = new CultureInfo("en-US");
+var localizationOptions = new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture(enUS),
+    SupportedCultures = new List<CultureInfo> { enUS },
+    SupportedUICultures = new List<CultureInfo> { enUS }
+};
+app.UseRequestLocalization(localizationOptions);
 
 // Run SeedingService in development mode
 if (app.Environment.IsDevelopment())
@@ -34,7 +45,6 @@ if (app.Environment.IsDevelopment())
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
