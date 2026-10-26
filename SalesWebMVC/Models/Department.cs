@@ -2,30 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SalesWebMVC.Models
+namespace SalesWebMVC.Models;
+
+public class Department
 {
-    public class Department
+    public int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public ICollection<Seller> Sellers { get; set; } = new List<Seller>();
+
+    public Department() { }
+
+    public Department(int id, string name)
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public ICollection<Seller> Sellers { get; set; } = new List<Seller>();
+        Id = id;
+        Name = name;
+    }
 
-        public Department() { }
+    public void AddSeller(Seller seller)
+    {
+        Sellers.Add(seller);
+    }
 
-        public Department(int id, string name)
-        {
-            Id = id;
-            Name = name;
-        }
-
-        public void AddSeller(Seller seller)
-        {
-            Sellers.Add(seller);
-        }
-
-        public double TotalSales(DateTime initial, DateTime final)
-        {
-            return Sellers.Sum(seller => seller.TotalSales(initial, final));
-        }
+    public double TotalSales(DateTime initial, DateTime final)
+    {
+        return Sellers.Sum(seller => seller.TotalSales(initial, final));
     }
 }

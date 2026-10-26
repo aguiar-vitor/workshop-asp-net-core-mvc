@@ -3,7 +3,6 @@ using SalesWebMVC.Services;
 using SalesWebMVC.Data;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
-using SalesWebMvc.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,9 +20,8 @@ builder.Services.AddScoped<SalesRecordService>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-var app = builder.Build(); // O 'app' é criado aqui!
+var app = builder.Build();
 
-// A configuração de localização do app deve ficar AQUI, depois de criado:
 var enUS = new CultureInfo("en-US");
 var localizationOptions = new RequestLocalizationOptions
 {

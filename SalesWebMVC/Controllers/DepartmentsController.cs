@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using SalesWebMVC.Models;
 using SalesWebMVC.Data;
 
+namespace SalesWebMVC.Controllers;
+
 public class DepartmentsController : Controller
 {
     private readonly SalesWebMVCContext _context;
@@ -12,13 +14,11 @@ public class DepartmentsController : Controller
         _context = context;
     }
 
-    // GET: DEPARTMENTS
-    public async Task<IActionResult> Index()    
+    public async Task<IActionResult> Index()
     {
         return View(await _context.Department.ToListAsync());
     }
 
-    // GET: DEPARTMENTS/Details/5
     public async Task<IActionResult> Details(int? id)
     {
         if (id == null)
@@ -28,6 +28,7 @@ public class DepartmentsController : Controller
 
         var department = await _context.Department
             .FirstOrDefaultAsync(m => m.Id == id);
+
         if (department == null)
         {
             return NotFound();
@@ -36,15 +37,11 @@ public class DepartmentsController : Controller
         return View(department);
     }
 
-    // GET: DEPARTMENTS/Create
     public IActionResult Create()
     {
         return View();
     }
 
-    // POST: DEPARTMENTS/Create
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create([Bind("Id,Name")] Department department)
@@ -58,7 +55,6 @@ public class DepartmentsController : Controller
         return View(department);
     }
 
-    // GET: DEPARTMENTS/Edit/5
     public async Task<IActionResult> Edit(int? id)
     {
         if (id == null)
@@ -74,12 +70,9 @@ public class DepartmentsController : Controller
         return View(department);
     }
 
-    // POST: DEPARTMENTS/Edit/5
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int? id, [Bind("Id,Name")] Department department)
+    public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Department department)
     {
         if (id != department.Id)
         {
@@ -109,7 +102,6 @@ public class DepartmentsController : Controller
         return View(department);
     }
 
-    // GET: DEPARTMENTS/Delete/5
     public async Task<IActionResult> Delete(int? id)
     {
         if (id == null)
@@ -119,6 +111,7 @@ public class DepartmentsController : Controller
 
         var department = await _context.Department
             .FirstOrDefaultAsync(m => m.Id == id);
+
         if (department == null)
         {
             return NotFound();
@@ -127,12 +120,12 @@ public class DepartmentsController : Controller
         return View(department);
     }
 
-    // POST: DEPARTMENTS/Delete/5
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> DeleteConfirmed(int? id)
+    public async Task<IActionResult> DeleteConfirmed(int id)
     {
         var department = await _context.Department.FindAsync(id);
+
         if (department != null)
         {
             _context.Department.Remove(department);
@@ -142,7 +135,7 @@ public class DepartmentsController : Controller
         return RedirectToAction(nameof(Index));
     }
 
-    private bool DepartmentExists(int? id)
+    private bool DepartmentExists(int id)
     {
         return _context.Department.Any(e => e.Id == id);
     }
